@@ -14,7 +14,7 @@ class KegiatanModel extends Model
         'tgl_berakhir', 'pakaian', 'tempat',
         'penyelenggara', 'pejabat_menghadiri',
         'protokol', 'kopim', 'dokpim', 'keterangan',
-        'celndar_id'
+        'celendar_id'
     ];
 
     public function protokolRole()
