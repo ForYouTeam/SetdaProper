@@ -22,8 +22,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->routeIs('pegawai.index') ? 'active' : '' }}">
-                    <a href="{{ route('pegawai.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->routeIs('pegawai.getAll') ? 'active' : '' }}">
+                    <a href="{{ route('pegawai.getAll') }}" class='sidebar-link'>
                         <i class="fas fa-user-plus"></i>
                         <span>Pegawai</span>
                     </a>

@@ -6,9 +6,8 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PegawaiRequest extends FormRequest
+class PegawaiRequestUpdate extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -18,7 +17,7 @@ class PegawaiRequest extends FormRequest
     {
         return [
             'nama' => 'required|min:2|max:255',
-            'nip' => 'required|unique:pegawai,nip|numeric',
+            'nip' => 'required|numeric',
             'jabatan' => 'required|min:2|max:255',
             'bagian' => 'required|min:2|max:255',
             'jk' => 'required|min:2|max:255'

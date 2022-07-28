@@ -14,7 +14,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.css"
+        integrity="sha256-nXeHln6Yx1boZLM6tS50KaqgXPNsEgmHmmfXsq0bdD8=" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/vendors/iconly/bold.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
@@ -60,13 +61,42 @@
             </footer>
         </div>
     </div>
+    <div class="modal fade" style="margin-top: 20px;" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="form-ubah"></form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.24/dist/sweetalert2.js"
+        integrity="sha256-FA9gDBtPQhVtxDpUlO2sYXDXEjNlQsk2awIRSezKgJg=" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        $(document).on('click', '#btn-close', function() {
+            $('#myModal').modal('hide');
+        });
+    </script>
     @yield('script')
 </body>
 
