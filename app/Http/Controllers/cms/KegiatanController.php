@@ -4,12 +4,19 @@ namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KegiatanRequest;
+use App\Interfaces\CalendarServiceInterfaces;
 use App\Models\KegiatanModel;
 use App\Models\PegawaiModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
 {
+    public function __construct(CalendarServiceInterfaces $calendarRepo)
+    {
+        $this->calendarRepo = $calendarRepo;
+    }
+
     public function getAll()
     {
         $data = array(
@@ -21,13 +28,16 @@ class KegiatanController extends Controller
 
     public function createKegiatan(KegiatanRequest $request)
     {
+        $data = $request->only([
+            'nama_kegiatan', 'tgl_mulai',
+            'tgl_berakhir', 'pakaian', 'tempat',
+            'penyelenggara', 'penjabat_menghadiri',
+            'protokol', 'kopim', 'dokpim', 'keterangan',
+        ]);
+
         try {
-            $data = $request->only([
-                'nama_kegiatan', 'tgl_mulai',
-                'tgl_berakhir', 'pakaian', 'tempat',
-                'penyelenggara', 'penjabat_menghadiri',
-                'protokol', 'kopim', 'dokpim', 'keterangan',
-            ]);
+            $idCalendar = $this->calendarRepo->createService($data);
+            $data['calendar_id'] = $idCalendar->googleEvent->id;
 
             KegiatanModel::create($data);
             $response = array(
@@ -87,13 +97,15 @@ class KegiatanController extends Controller
 
     public function updateKegiatan($id, KegiatanRequest $request)
     {
+        $data = $request->only([
+            'calendar_id', 'nama_kegiatan', 'tgl_mulai',
+            'tgl_berakhir', 'pakaian', 'tempat',
+            'penyelenggara', 'penjabat_menghadiri',
+            'protokol', 'kopim', 'dokpim', 'keterangan',
+        ]);
+
         try {
-            $data = $request->only([
-                'nama_kegiatan', 'tgl_mulai',
-                'tgl_berakhir', 'pakaian', 'tempat',
-                'penyelenggara', 'penjabat_menghadiri',
-                'protokol', 'kopim', 'dokpim', 'keterangan',
-            ]);
+            $this->calendarRepo->updateService($request->calendar_id, $data);
 
             $findPegawai = KegiatanModel::whereId($id);
             if ($findPegawai->first()) {
@@ -134,6 +146,7 @@ class KegiatanController extends Controller
         try {
             $findPegawai = KegiatanModel::whereId($id);
             if ($findPegawai->first()) {
+                $this->calendarRepo->deleteService($findPegawai->value('calendar_id'));
                 $response = array(
                     'data' => $findPegawai->delete(),
                     'response' => array(

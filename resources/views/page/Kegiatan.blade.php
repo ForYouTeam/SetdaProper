@@ -44,10 +44,13 @@
                                             </th>
                                             <th>
                                                 <span
-                                                    style="font-size: 13">{{ date('d F Y', strtotime($d->tgl_tgl_berakhir)) }}</span>
+                                                    style="font-size: 13">{{ date('d F Y', strtotime($d->tgl_berakhir)) }}</span>
                                                 <br>
                                                 <small class="text-muted"
                                                     style="font-size: 7">{{ date('H:i', strtotime($d->tgl_berakhir)) }}</small>
+                                                @if (date('d-m-Y H:i', strtotime($d->tgl_berakhir)) < date('d-m-Y H:i'))
+                                                <small class="text-danger">Tgl Kadarluarsa</small>
+                                                @endif
                                             </th>
                                             <th>
                                                 <button data-id="{{ $d->id }}" id="btn-ubah" type="button"
@@ -192,7 +195,15 @@
             let url = `{{ config('app.url') }}/kegiatan`;
             let form = document.getElementById('form-simpan');
             let data = new FormData(form);
-
+            Swal.fire({
+                title: 'Loading...',
+                html: 'Sedang Mengirim Data.',
+                icon: 'warning',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    }
+            });
             $.ajax({
                 url: url,
                 type: "POST",
@@ -201,6 +212,7 @@
                 contentType: false,
                 cache: false,
                 success: (result) => {
+                    Swal.hideLoading()
                     Swal.fire({
                         title: result.response.title,
                         text: result.response.message,
@@ -243,6 +255,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="first-name-vertical">NAMA KEGIATAN</label>
+                                    <input type="hidden" name="calendar_id" value="${result.data.calendar_id}">
                                     <input type="text" id="first-name-vertical" class="form-control"
                                         name="nama_kegiatan" placeholder="Nama kegiatan" value="${result.data.nama_kegiatan}">
                                     <small id="nama_kegiatan-alert2" class="text-danger mini-alert"></small>
@@ -341,11 +354,21 @@
             let data = $('#form-ubah').serialize();
             $('#btn-kirim').prop('disabled', true);
             $('#myModal').modal('hide');
+            Swal.fire({
+                title: 'Loading...',
+                html: 'Sedang Mengirim Data.',
+                icon: 'warning',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    }
+            });
             $.ajax({
                 url: url,
                 method: "PATCH",
                 data: data,
                 success: function(result) {
+                    Swal.hideLoading();
                     Swal.fire({
                         title: result.response.title,
                         text: result.response.message,
@@ -392,6 +415,15 @@
                 confirmButtonText: 'Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
+                    Swal.fire({
+                    title: 'Loading...',
+                    html: 'Sedang Menghapus Data.',
+                    icon: 'warning',
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        }
+                    });
                     $.ajax({
                         url: url,
                         type: 'delete',

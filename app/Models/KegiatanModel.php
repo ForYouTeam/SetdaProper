@@ -14,7 +14,7 @@ class KegiatanModel extends Model
         'tgl_berakhir', 'pakaian', 'tempat',
         'penyelenggara', 'penjabat_menghadiri',
         'protokol', 'kopim', 'dokpim', 'keterangan',
-        'celendar_id'
+        'calendar_id'
     ];
 
     public function protokolRole()
@@ -30,10 +30,5 @@ class KegiatanModel extends Model
     public function dokpimRole()
     {
         return $this->belongsTo(PegawaiModel::class, 'kopim')->select(array('id', 'nama'));
-    }
-
-    public function calendarRole()
-    {
-        return $this->belongsTo(CalendarServiceModel::class, 'calendar_id');
     }
 }

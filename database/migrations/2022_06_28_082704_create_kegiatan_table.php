@@ -21,7 +21,7 @@ class CreateKegiatanTable extends Migration
             $table->foreignId('kopim')->nullable()->constrained('pegawai');
             $table->foreignId('dokpim')->nullable()->constrained('pegawai');
             $table->string('keterangan');
-            $table->foreignId('calendar_id')->constrained('calendar_service');
+            $table->string('calendar_id');
             $table->timestamps();
         });
     }
