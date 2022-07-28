@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\cms\DashboardController;
 use App\Http\Controllers\cms\KegiatanController;
 use App\Http\Controllers\cms\PegawaiController;
 use App\Models\KegiatanModel;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('layout.Base');
-})->name('dashboard.index');
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/', 'index')->name('dashboard.index');
+});
 
 Route::prefix('pegawai')->controller(PegawaiController::class)->group(function () {
     Route::get('/', 'getAll')->name('pegawai.getAll');
