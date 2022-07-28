@@ -12,24 +12,24 @@ class KegiatanModel extends Model
     protected $fillable = [
         'id', 'nama_kegiatan', 'tgl_mulai',
         'tgl_berakhir', 'pakaian', 'tempat',
-        'penyelenggara', 'pejabat_menghadiri',
+        'penyelenggara', 'penjabat_menghadiri',
         'protokol', 'kopim', 'dokpim', 'keterangan',
         'celendar_id'
     ];
 
     public function protokolRole()
     {
-        return $this->belongsTo(PegawaiModel::class, 'protokol');
+        return $this->belongsTo(PegawaiModel::class, 'protokol')->select(array('id', 'nama'));
     }
 
     public function kopimRole()
     {
-        return $this->belongsTo(PegawaiModel::class, 'kopim');
+        return $this->belongsTo(PegawaiModel::class, 'kopim')->select(array('id', 'nama'));
     }
 
     public function dokpimRole()
     {
-        return $this->belongsTo(PegawaiModel::class, 'kopim');
+        return $this->belongsTo(PegawaiModel::class, 'kopim')->select(array('id', 'nama'));
     }
 
     public function calendarRole()

@@ -29,8 +29,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->routeIs('kegiatan.index') ? 'active' : '' }}">
-                    <a href="{{ route('kegiatan.index') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->routeIs('kegiatan.getAll') ? 'active' : '' }}">
+                    <a href="{{ route('kegiatan.getAll') }}" class='sidebar-link'>
                         <i class="fas fa-calendar-check"></i>
                         <span>Kegiatan</span>
                     </a>
