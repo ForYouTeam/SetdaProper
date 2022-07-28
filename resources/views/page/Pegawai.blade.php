@@ -126,7 +126,7 @@
                     <a class="nav-link active" id="v-pills-table-tab" data-bs-toggle="pill" href="#v-pills-table"
                         role="tab" aria-controls="v-pills-table" aria-selected="true">Tabel Data</a>
                     <a class="nav-link" id="v-pills-form-tab" data-bs-toggle="pill" href="#v-pills-form" role="tab"
-                        aria-controls="v-pills-form" aria-selected="false">Profile</a>
+                        aria-controls="v-pills-form" aria-selected="false">Formulir</a>
                 </div>
             </div>
         </div>

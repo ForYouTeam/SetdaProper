@@ -25,7 +25,6 @@ class KegiatanRequest extends FormRequest
             'kopim' => 'required|integer',
             'dokpim' => 'required|integer',
             'keterangan' => 'required|min:2',
-            'calendar_id' => 'required|integer',
         ];
     }
 
