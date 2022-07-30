@@ -22,12 +22,14 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ request()->routeIs('pegawai.getAll') ? 'active' : '' }}">
-                    <a href="{{ route('pegawai.getAll') }}" class='sidebar-link'>
-                        <i class="fas fa-user-plus"></i>
-                        <span>Pegawai</span>
-                    </a>
-                </li>
+                @hasrole('super-admin')
+                    <li class="sidebar-item {{ request()->routeIs('pegawai.getAll') ? 'active' : '' }}">
+                        <a href="{{ route('pegawai.getAll') }}" class='sidebar-link'>
+                            <i class="fas fa-user-plus"></i>
+                            <span>Pegawai</span>
+                        </a>
+                    </li>
+                @endhasrole
 
                 <li class="sidebar-item {{ request()->routeIs('kegiatan.getAll') ? 'active' : '' }}">
                     <a href="{{ route('kegiatan.getAll') }}" class='sidebar-link'>
